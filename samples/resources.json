@@ -1,35 +1,44 @@
 [
   {
-    "id": "s3-app-data",
-    "type": "s3_bucket",
-    "block_public_access": true,
-    "server_side_encryption": true,
+    "id": "stg-appdata-prod",
+    "type": "storage_account",
+    "allowBlobPublicAccess": false,
+    "encryption": {
+      "services": { "blob": { "enabled": true } }
+    },
     "tags": { "env": "prod", "team": "platform" }
   },
   {
-    "id": "ec2-web-01",
-    "type": "ec2_instance",
-    "encrypted": true,
+    "id": "vm-web-01",
+    "type": "virtual_machine",
+    "encryptionAtRest": true,
     "tags": { "env": "prod", "team": "frontend" }
   },
   {
-    "id": "s3-public-legacy",
-    "type": "s3_bucket",
-    "block_public_access": false,
+    "id": "stg-legacy-public",
+    "type": "storage_account",
+    "allowBlobPublicAccess": true,
     "tags": { "env": "legacy" }
   },
   {
-    "id": "iam-admin-role",
-    "type": "iam_policy",
-    "statement": [
-      { "action": ["s3:GetObject", "s3:PutObject"], "resource": "*" }
+    "id": "role-storage-contributor",
+    "type": "role_definition",
+    "permissions": [
+      {
+        "actions": [
+          "Microsoft.Storage/storageAccounts/read",
+          "Microsoft.Storage/storageAccounts/blobServices/containers/read"
+        ]
+      }
     ]
   },
   {
-    "id": "iam-overly-broad",
-    "type": "iam_policy",
-    "statement": [
-      { "action": ["s3:*"], "resource": "*" }
+    "id": "role-overly-broad",
+    "type": "role_definition",
+    "permissions": [
+      {
+        "actions": ["Microsoft.Storage/storageAccounts/*"]
+      }
     ]
   }
 ]

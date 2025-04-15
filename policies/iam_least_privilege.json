@@ -1,9 +1,9 @@
 [
   {
     "id": "POL-004",
-    "name": "IAM Least Privilege",
+    "name": "Azure RBAC Least Privilege",
     "control": "restrict_iam_wildcards",
-    "resource_types": ["iam_policy"],
+    "resource_types": ["role_definition"],
     "severity": "high",
     "remediation": "Replace wildcard actions with explicit action lists",
     "_stakeholder_requirement": "Access must follow least privilege – no overly broad permissions"

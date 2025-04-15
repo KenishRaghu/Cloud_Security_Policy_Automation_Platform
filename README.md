@@ -16,8 +16,8 @@ python ci_check.py
 | Requirement | Implementation |
 |-------------|----------------|
 | Python-based | `engine.py` – policy loader, evaluator dispatch, result aggregation |
-| Cloud technologies | Policy definitions for AWS resource types (S3, EC2, IAM); resource format aligns with IaC outputs |
-| Automate compliance checks | `evaluators/` – programmatic checks for tagging, encryption, public access, IAM |
+| Cloud technologies | Policy definitions for Azure resource types (Storage Account, VM, RBAC); resource format aligns with ARM/Bicep outputs |
+| Automate compliance checks | `evaluators/` – programmatic checks for tagging, encryption, public access, RBAC |
 | Scalable | Policy-as-code (JSON) + pluggable evaluators; add policies without changing engine |
 
 **Core flow:** Load policies → Match resources to policies → Run evaluators → Return pass/fail report.
@@ -27,9 +27,9 @@ python ci_check.py
 | Stakeholder requirement | Policy ID | Technical control |
 |-------------------------|-----------|-------------------|
 | Resources must be tagged for cost/audit | POL-001 | `require_tags` – enforce `env`, `team` |
-| Storage must not be public | POL-002 | `block_public_access` – S3 block public access |
-| Sensitive data encrypted at rest | POL-003 | `require_encryption` – S3 SSE, EBS encryption |
-| Least privilege – no broad permissions | POL-004 | `restrict_iam_wildcards` – disallow `*` in IAM actions |
+| Storage must not be public | POL-002 | `block_public_access` – Azure allowBlobPublicAccess=false |
+| Sensitive data encrypted at rest | POL-003 | `require_encryption` – Storage encryption, VM disk encryption |
+| Least privilege – no broad permissions | POL-004 | `restrict_iam_wildcards` – disallow `*` in RBAC actions |
 
 **Product lifecycle enforcement:**
 

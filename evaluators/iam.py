@@ -1,14 +1,14 @@
-"""IAM least privilege – stakeholder requirement: avoid overly broad permissions."""
+"""Azure RBAC least privilege – stakeholder requirement: avoid overly broad permissions."""
 
 
 def evaluate_iam_least_privilege(resource: dict, policy: dict) -> tuple[bool, str]:
     """
-    IAM policies must not use wildcard (*) in actions.
+    Azure role definitions must not use wildcard (*) in actions.
     Returns (passed, message).
     """
-    statements = resource.get("statement", [])
-    for stmt in statements:
-        actions = stmt.get("action", []) or stmt.get("Action", [])
+    permissions = resource.get("permissions", [])
+    for perm in permissions:
+        actions = perm.get("actions", []) or perm.get("Actions", [])
         if isinstance(actions, str):
             actions = [actions]
         for act in actions:

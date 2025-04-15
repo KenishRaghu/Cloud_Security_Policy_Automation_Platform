@@ -7,9 +7,9 @@ How cross-functional security requirements are translated into technical policie
 | Stakeholder requirement | Source (e.g. security review, compliance) | Policy ID | Control | Implementation |
 |-------------------------|-------------------------------------------|-----------|---------|----------------|
 | Resources must be tagged for cost allocation and audit | Finance, audit | POL-001 | require_tags | Enforce `env`, `team` tags on compute/storage |
-| Storage must not be publicly accessible | Security, data protection | POL-002 | block_public_access | Require S3 block_public_access |
-| Sensitive data must be encrypted at rest | Compliance (e.g. PCI/SOC2) | POL-003 | require_encryption | S3 SSE, EBS encryption |
-| Access must follow least privilege | Security, IAM governance | POL-004 | restrict_iam_wildcards | Disallow `*` in IAM action lists |
+| Storage must not be publicly accessible | Security, data protection | POL-002 | block_public_access | Set allowBlobPublicAccess=false on Storage Account |
+| Sensitive data must be encrypted at rest | Compliance (e.g. PCI/SOC2) | POL-003 | require_encryption | Storage encryption, VM disk encryption |
+| Access must follow least privilege | Security, Azure RBAC governance | POL-004 | restrict_iam_wildcards | Disallow `*` in role definition actions |
 
 ## Product Lifecycle Enforcement
 
@@ -20,7 +20,7 @@ How cross-functional security requirements are translated into technical policie
 
 ## Adding New Requirements
 
-1. Capture stakeholder requirement (e.g. "RDS must use encrypted connections").
+1. Capture stakeholder requirement (e.g. "Azure SQL must use encrypted connections").
 2. Define policy JSON with `control`, `resource_types`, `severity`.
 3. Implement evaluator in `evaluators/` and register in `EVALUATORS`.
 4. Policies apply automatically at CI and deployment stages.
