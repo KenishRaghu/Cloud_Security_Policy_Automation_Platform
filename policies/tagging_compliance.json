@@ -1,0 +1,11 @@
+[
+  {
+    "id": "POL-001",
+    "name": "Resource Tagging Compliance",
+    "control": "require_tags",
+    "resource_types": ["ec2_instance", "s3_bucket", "lambda_function"],
+    "severity": "high",
+    "remediation": "Add required tags: env, team",
+    "_stakeholder_requirement": "Resources must be tagged for cost allocation and audit"
+  }
+]

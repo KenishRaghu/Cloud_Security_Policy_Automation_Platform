@@ -1,0 +1,35 @@
+[
+  {
+    "id": "s3-app-data",
+    "type": "s3_bucket",
+    "block_public_access": true,
+    "server_side_encryption": true,
+    "tags": { "env": "prod", "team": "platform" }
+  },
+  {
+    "id": "ec2-web-01",
+    "type": "ec2_instance",
+    "encrypted": true,
+    "tags": { "env": "prod", "team": "frontend" }
+  },
+  {
+    "id": "s3-public-legacy",
+    "type": "s3_bucket",
+    "block_public_access": false,
+    "tags": { "env": "legacy" }
+  },
+  {
+    "id": "iam-admin-role",
+    "type": "iam_policy",
+    "statement": [
+      { "action": ["s3:GetObject", "s3:PutObject"], "resource": "*" }
+    ]
+  },
+  {
+    "id": "iam-overly-broad",
+    "type": "iam_policy",
+    "statement": [
+      { "action": ["s3:*"], "resource": "*" }
+    ]
+  }
+]

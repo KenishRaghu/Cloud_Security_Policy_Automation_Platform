@@ -1,0 +1,20 @@
+[
+  {
+    "id": "POL-002",
+    "name": "Block Public Storage Access",
+    "control": "block_public_access",
+    "resource_types": ["s3_bucket"],
+    "severity": "critical",
+    "remediation": "Enable block_public_access on the bucket",
+    "_stakeholder_requirement": "Storage must not be publicly accessible"
+  },
+  {
+    "id": "POL-003",
+    "name": "Encryption at Rest",
+    "control": "require_encryption",
+    "resource_types": ["s3_bucket", "ec2_instance"],
+    "severity": "high",
+    "remediation": "Enable server-side encryption (S3) or EBS encryption (EC2)",
+    "_stakeholder_requirement": "Sensitive data must be encrypted at rest"
+  }
+]

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "POL-004",
+    "name": "IAM Least Privilege",
+    "control": "restrict_iam_wildcards",
+    "resource_types": ["iam_policy"],
+    "severity": "high",
+    "remediation": "Replace wildcard actions with explicit action lists",
+    "_stakeholder_requirement": "Access must follow least privilege – no overly broad permissions"
+  }
+]
